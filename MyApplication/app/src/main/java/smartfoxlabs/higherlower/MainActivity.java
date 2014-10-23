@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import Core.Game;
@@ -18,6 +20,7 @@ public class MainActivity extends Activity {
     TextView score;
     TextView time;
     Game game;
+    ProgressBar pb;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
@@ -25,6 +28,7 @@ public class MainActivity extends Activity {
         public void run() {
             game.subTimer();
             time.setText(String.valueOf(game.getTime()));
+            pb.setProgress(game.getTime());
             if (game.getTime() > 0)
                 timerHandler.postDelayed(this, 1000);
             else timerHandler.removeCallbacks(timerRunnable);
@@ -34,10 +38,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         txt = (TextView) findViewById(R.id.tvNumber);
         score = (TextView) findViewById(R.id.textView2);
         time = (TextView) findViewById(R.id.textView4);
+        pb = (ProgressBar) findViewById(R.id.progressBar);
+        pb.setMax(game.MAX_TIME_LIMIT);
+        pb.setProgress(game.MAX_TIME_LIMIT);
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
