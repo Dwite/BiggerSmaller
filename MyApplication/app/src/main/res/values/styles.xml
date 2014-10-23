@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <style name="ProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progressbar</item>
+        <item name="android:layout_height">@dimen/progressbar</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 </resources>

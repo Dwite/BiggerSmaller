@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
@@ -12,28 +13,50 @@ import android.widget.TextView;
 
 import Core.Game;
 import Core.NumberGenerator;
+import Gestures.GameGestureListener;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements GameGestureListener.SimpleGestureListener {
 
     TextView txt;
     TextView score;
     TextView time;
     Game game;
     ProgressBar pb;
+    public static final int TIMER_INTERVAL_SECOND = 1000;
+    public static final int TIMER_INTERVAL_PB_UPDATE = 250;
     Handler timerHandler = new Handler();
+
     Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
             game.subTimer();
             time.setText(String.valueOf(game.getTime()));
-            pb.setProgress(game.getTime());
-            if (game.getTime() > 0)
-                timerHandler.postDelayed(this, 1000);
-            else timerHandler.removeCallbacks(timerRunnable);
+            //pb.setProgress(game.getTime());
+            if (game.getTime() > 0) {
+                timerHandler.postDelayed(this, TIMER_INTERVAL_SECOND);
+            }
+            else {
+                if(pb.getProgress() > 0)
+                    pb.setProgress(0);
+                timerHandler.removeCallbacks(timerRunnable);
+                timerHandler.removeCallbacks(progressRunnable);
+            }
         }
     };
+
+    Runnable progressRunnable = new Runnable() {
+        @Override
+        public void run() {
+            pb.setProgress(pb.getProgress() - 1);
+            if (game.getTime() > 0) {
+                timerHandler.postDelayed(this, TIMER_INTERVAL_PB_UPDATE);
+            }
+        }
+    };
+
+    private GameGestureListener detector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +67,8 @@ public class MainActivity extends Activity {
         score = (TextView) findViewById(R.id.textView2);
         time = (TextView) findViewById(R.id.textView4);
         pb = (ProgressBar) findViewById(R.id.progressBar);
-        pb.setMax(game.MAX_TIME_LIMIT);
-        pb.setProgress(game.MAX_TIME_LIMIT);
+        pb.setMax(game.MAX_TIME_LIMIT * 4);
+        pb.setProgress(game.MAX_TIME_LIMIT * 4);
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +77,18 @@ public class MainActivity extends Activity {
         });
         game = new Game();
         updateUI();
+        detector = new GameGestureListener(this,this);
+
     }
 
     public void generateNumber(View v) {
 
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent me){
+        // Call onTouchEvent of SimpleGestureFilter class
+        this.detector.onTouchEvent(me);
+        return super.dispatchTouchEvent(me);
     }
 
     public void updateUI() {
@@ -70,20 +101,38 @@ public class MainActivity extends Activity {
         game.start();
         time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
         updateUI();
-        timerHandler.postDelayed(timerRunnable,1000);
+        timerHandler.postDelayed(timerRunnable,TIMER_INTERVAL_SECOND);
+        timerHandler.postDelayed(progressRunnable,TIMER_INTERVAL_PB_UPDATE);
     }
 
-    public void checkAnswer(View v) {
-        boolean flag = false;
-        if(v.getId() == R.id.button)
-            flag = true;
-        game.checkAnswer(flag);
-        updateUI();
-    }
 
     @Override
     public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
+    }
+
+    @Override
+    public void onSwipe(int direction) {
+        if(game.getEndGame()) {
+            return;
+        }
+        boolean flag = false;
+        switch (direction) {
+            case GameGestureListener.SWIPE_UP :
+                flag = true;
+                break;
+            case GameGestureListener.SWIPE_DOWN :
+                flag = false;
+                break;
+            default: break;
+        }
+        game.checkAnswer(flag);
+        updateUI();
+    }
+
+    @Override
+    public void onDoubleTap() {
+
     }
 }

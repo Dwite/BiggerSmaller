@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <TextView
@@ -13,29 +14,8 @@
         android:gravity="center"
         android:id="@+id/tvNumber"
         android:textStyle="bold"
-        android:textSize="36sp"
+        android:textSize="50sp"
         android:onClick="generateNumber"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Больше"
-        android:onClick="checkAnswer"
-        android:id="@+id/button"
-        android:layout_above="@+id/tvNumber"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="71dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Меньше"
-        android:onClick="checkAnswer"
-        android:id="@+id/button2"
-        android:layout_below="@+id/tvNumber"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="87dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,10 +23,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Очки :"
         android:id="@+id/textView"
-        android:layout_above="@+id/tvNumber"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:layout_marginBottom="25dp" />
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,8 +34,9 @@
         android:text="0"
         android:id="@+id/textView2"
         android:layout_alignTop="@+id/textView"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button" />
+        android:layout_toLeftOf="@+id/textView3"
+        android:layout_toStartOf="@+id/textView3"
+        android:layout_marginRight="13dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,10 +53,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Время"
         android:id="@+id/textView3"
-        android:layout_above="@+id/button"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/tvNumber"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,9 +67,7 @@
         android:layout_alignEnd="@+id/tvNumber" />
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
+        style="@style/ProgressBar"
         android:id="@+id/progressBar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

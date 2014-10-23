@@ -2,7 +2,12 @@
 <resources>
 
     <string name="app_name">HigherLower</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="home">Домой</string>
+    <string name="restart">Заново</string>
+    <string name="score">Очки</string>
+    <string name="timer">Таймер</string>
+    <string name="game_time">Игра на время</string>
+    <string name="game_arcade">Аркада</string>
+    <string name="game_multiplayer">Сетевая игра</string>
 
 </resources>

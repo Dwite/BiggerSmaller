@@ -30,6 +30,7 @@ public class Game {
 
     public void start() {
         mTime = MAX_TIME_LIMIT;
+        endGame = false;
         nextRound();
     }
 
@@ -68,15 +69,23 @@ public class Game {
     public void restart() {
         score = 0;
         mTime = MAX_TIME_LIMIT;
+        endGame = false;
     }
 
     private int getCurrentNumber() { return currentNumber; }
 
     public String getCurrentNumberString() {
         Random r = new Random();
-        int type = r.nextInt(11);
-        if(type == 10)
+        int type = r.nextInt(20);
+        if(type == 16)
             return EnglishNumberConverter.convert(currentNumber);
+        if(type == 17) {
+            String number = "";
+            int partOne = r.nextInt(currentNumber);
+            int partTwo = currentNumber - partOne;
+            number = String.valueOf(partOne) + " + " + String.valueOf(partTwo);
+            return number;
+        }
         else return String.valueOf(getCurrentNumber());
     }
     private void addScore() { score++; }
