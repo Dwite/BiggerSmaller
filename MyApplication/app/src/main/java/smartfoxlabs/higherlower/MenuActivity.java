@@ -24,6 +24,11 @@ public class MenuActivity extends BaseActivity {
     ArrayList<Integer> menuIcons;
     ArrayList<ResultMenuItem> menuItems;
 
+    public final String GAME_MODE = "MODE";
+    public final int TIME_MODE = 0;
+    public final int ARCADE_MODE = 1;
+    public final int MULTIPLAYER_MODE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +49,22 @@ public class MenuActivity extends BaseActivity {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent gameTime = new Intent(getApplicationContext(),MainActivity.class);
                 switch (i) {
                     case 0 : {
-                        Intent gameTime = new Intent(getApplicationContext(),MainActivity.class);
+                        gameTime.putExtra(GAME_MODE,TIME_MODE);
                         startActivity(gameTime);
                         break;
                     }
-                    case 1 : break;
-                    case 2 : break;
+                    case 1 :
+                        gameTime.putExtra(GAME_MODE,ARCADE_MODE);
+                        startActivity(gameTime);
+                        break;
+                    case 2 :
+                        Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
+                        //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
+                        //startActivity(gameTime);
+                        break;
                     default: break;
                 }
             }

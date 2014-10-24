@@ -93,6 +93,9 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
 
     public void updateUI() {
         txt.setText(game.getCurrentNumberString());
+        if(txt.getText().toString().length() > 9)
+            txt.setTextSize(48f);
+        else txt.setTextSize(64f);
         score.setText(String.valueOf(game.getScore()));
     }
 

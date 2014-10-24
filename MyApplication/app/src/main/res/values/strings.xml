@@ -14,10 +14,10 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="result_menu">
-        <item>Поделиться</item>
-        <item>Заново</item>
         <item>Главное меню</item>
+        <item>Заново</item>
         <item>Рекорды</item>
+        <item>Поделиться</item>
     </string-array>
     
     <string-array name="main_menu">

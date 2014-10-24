@@ -7,14 +7,12 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Text.Black.Bold"
         android:layout_centerInParent="true"
         android:text="Click me"
         android:gravity="center"
         android:id="@+id/tvNumber"
-        android:textStyle="bold"
-        android:textSize="50sp"
+        android:textSize="64sp"
         android:onClick="generateNumber"/>
 
     <TextView
