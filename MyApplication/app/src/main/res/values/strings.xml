@@ -9,5 +9,14 @@
     <string name="game_time">Игра на время</string>
     <string name="game_arcade">Аркада</string>
     <string name="game_multiplayer">Сетевая игра</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
+    <string-array name="result_menu">
+        <item>Поделиться</item>
+        <item>Заново</item>
+        <item>Главное меню</item>
+        <item>Рекорды</item>
+    </string-array>
 </resources>

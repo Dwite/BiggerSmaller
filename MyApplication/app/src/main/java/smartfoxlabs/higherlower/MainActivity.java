@@ -1,10 +1,9 @@
 package smartfoxlabs.higherlower;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -12,11 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import Core.Game;
-import Core.NumberGenerator;
 import Gestures.GameGestureListener;
 
 
-public class MainActivity extends Activity implements GameGestureListener.SimpleGestureListener {
+public class MainActivity extends BaseActivity implements GameGestureListener.SimpleGestureListener {
 
     TextView txt;
     TextView score;
@@ -25,6 +23,8 @@ public class MainActivity extends Activity implements GameGestureListener.Simple
     ProgressBar pb;
     public static final int TIMER_INTERVAL_SECOND = 1000;
     public static final int TIMER_INTERVAL_PB_UPDATE = 250;
+    public static final String RESULT_CODE = "RESULT";
+
     Handler timerHandler = new Handler();
 
     Runnable timerRunnable = new Runnable() {
@@ -42,6 +42,7 @@ public class MainActivity extends Activity implements GameGestureListener.Simple
                     pb.setProgress(0);
                 timerHandler.removeCallbacks(timerRunnable);
                 timerHandler.removeCallbacks(progressRunnable);
+                onGameEnd();
             }
         }
     };
@@ -61,10 +62,9 @@ public class MainActivity extends Activity implements GameGestureListener.Simple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         txt = (TextView) findViewById(R.id.tvNumber);
-        score = (TextView) findViewById(R.id.textView2);
+        score = (TextView) findViewById(R.id.tVScoreValue);
         time = (TextView) findViewById(R.id.textView4);
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setMax(game.MAX_TIME_LIMIT * 4);
@@ -100,6 +100,7 @@ public class MainActivity extends Activity implements GameGestureListener.Simple
     public void startGame(View v) {
         game.start();
         time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
+        pb.setProgress(game.MAX_TIME_LIMIT * 4);
         updateUI();
         timerHandler.postDelayed(timerRunnable,TIMER_INTERVAL_SECOND);
         timerHandler.postDelayed(progressRunnable,TIMER_INTERVAL_PB_UPDATE);
@@ -131,6 +132,11 @@ public class MainActivity extends Activity implements GameGestureListener.Simple
         updateUI();
     }
 
+    public void onGameEnd() {
+        Intent resultActivity = new Intent(getApplicationContext(),ResultActivity.class);
+        resultActivity.putExtra(RESULT_CODE,game.getScore());
+        startActivity(resultActivity);
+    }
     @Override
     public void onDoubleTap() {
 

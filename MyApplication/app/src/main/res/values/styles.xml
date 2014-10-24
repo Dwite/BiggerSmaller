@@ -11,4 +11,18 @@
         <item name="android:layout_height">@dimen/progressbar</item>
         <item name="android:layout_width">match_parent</item>
     </style>
+    <style name="Text" parent="android:TextAppearance.DeviceDefault.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Text.Black">
+        <item name="android:textSize">@dimen/text_menu</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Text.Black.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

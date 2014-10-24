@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:background="@color/background_result"
+    tools:context="smartfoxlabs.higherlower.ResultActivity">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="NOT BAD!"
+            android:id="@+id/tvScoreStatus"
+            android:textSize="@dimen/text_score"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="40"
+            android:id="@+id/tVScoreValue"
+            android:textSize="@dimen/text_score"
+            android:textStyle="bold"
+            android:textColor="@color/text_result"
+            android:layout_below="@+id/tvScoreStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_big" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Score"
+            android:id="@+id/tVScore"
+            android:textAllCaps="true"
+            android:textColor="@color/text_gray"
+            android:layout_below="@+id/tVScoreValue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_medium" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_big"
+        android:paddingLeft="@dimen/margin_big"
+        android:paddingRight="@dimen/margin_big"
+        android:id="@+id/lstResultMenu"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

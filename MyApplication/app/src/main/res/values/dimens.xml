@@ -4,4 +4,12 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="progressbar">25dp</dimen>
+    <dimen name="margin_big">35dp</dimen>
+    <dimen name="margin_medium">30dp</dimen>
+
+    <dimen name="text_result">36sp</dimen>
+    <dimen name="text_score">32sp</dimen>
+    <dimen name="text_menu">20sp</dimen>
+
+    <dimen name="menu_icon">32dp</dimen>
 </resources>

@@ -13,7 +13,7 @@ import android.os.Handler;
  */
 public class Game {
     private NumberGenerator generator;
-    public static final int MAX_TIME_LIMIT = 60;
+    public static final int MAX_TIME_LIMIT = 5;
     private int score;
     private int mTime;
     private int currentNumber;
@@ -31,6 +31,7 @@ public class Game {
     public void start() {
         mTime = MAX_TIME_LIMIT;
         endGame = false;
+        score = 0;
         nextRound();
     }
 
