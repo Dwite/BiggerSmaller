@@ -32,15 +32,15 @@ public class ResultActivity extends BaseActivity {
         menuNames = getResources().getStringArray(R.array.result_menu);
         menuItems = new ArrayList<ResultMenuItem>();
         menuIcons = new ArrayList<Integer>();
-        menuIcons.add(R.drawable.ic_launcher);
-        menuIcons.add(R.drawable.ic_launcher);
-        menuIcons.add(R.drawable.ic_launcher);
-        menuIcons.add(R.drawable.ic_launcher);
+        menuIcons.add(R.drawable.ic_home);
+        menuIcons.add(R.drawable.ic_refresh);
+        menuIcons.add(R.drawable.ic_trophy);
+        menuIcons.add(R.drawable.ic_share);
         for(int i = 0 ; i < menuNames.length; i++) {
             ResultMenuItem menuItem = new ResultMenuItem(menuIcons.get(i),menuNames[i]);
             menuItems.add(menuItem);
         }
-        adapter = new ResultMenuAdapter(getApplicationContext(), menuItems);
+        adapter = new ResultMenuAdapter(getApplicationContext(), menuItems,0);
         lstMenu.setAdapter(adapter);
     }
 
