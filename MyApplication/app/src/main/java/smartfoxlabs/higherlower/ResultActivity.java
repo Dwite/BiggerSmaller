@@ -68,9 +68,20 @@ public class ResultActivity extends BaseActivity {
                         //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
                         //startActivity(gameTime);
                         break;
+                    case 3: shareIt();
+                        break;
                     default: break;
                 }
             }
         });
+    }
+
+    private void shareIt() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = getString(R.string.share_start,score);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HigherLower");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 }

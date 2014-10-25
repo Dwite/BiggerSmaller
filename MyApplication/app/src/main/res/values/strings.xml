@@ -10,9 +10,8 @@
     <string name="game_arcade">Аркада</string>
     <string name="game_multiplayer">Сетевая игра</string>
     <string name="title_activity_result">ResultActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="share_start">Сможешь побить этот счёт %d очков в #higherlower.</string>
     <string-array name="result_menu">
         <item>Главное меню</item>
         <item>Заново</item>

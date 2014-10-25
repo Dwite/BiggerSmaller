@@ -146,7 +146,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
 
     @Override
     public void onSwipe(int direction) {
-        if(game.getEndGame()) {
+        if(game.getEndGame() || game.isRunning() == false) {
             return;
         }
         boolean flag = false;

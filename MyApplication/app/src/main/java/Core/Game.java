@@ -1,11 +1,6 @@
 package Core;
 
-import android.content.Context;
-import android.util.Log;
-
 import java.util.Random;
-import java.util.Timer;
-import android.os.Handler;
 
 
 /**
@@ -18,18 +13,21 @@ public abstract class Game {
     protected int mTime;
     protected int currentNumber;
     protected int prevNumber;
+    protected boolean mRunning;
     private boolean endGame;
 
     public Game() {
         generator = new NumberGenerator();
         currentNumber = generator.genNumber();
         endGame = false;
+        mRunning = false;
     }
 
     public void start() {
         mTime = MAX_TIME_LIMIT;
         endGame = false;
         score = 0;
+        mRunning = true;
         nextRound();
     }
 
@@ -73,12 +71,14 @@ public abstract class Game {
 
     public void endGame() {
         endGame = true;
+        mRunning = false;
     }
 
     public void restart() {
         score = 0;
         mTime = MAX_TIME_LIMIT;
         endGame = false;
+        mRunning = false;
     }
 
     private int getCurrentNumber() { return currentNumber; }
@@ -111,4 +111,6 @@ public abstract class Game {
     public int getTime() { return mTime; }
 
     public void subTimer() { mTime--; }
+
+    public boolean isRunning() { return mRunning; }
 }
