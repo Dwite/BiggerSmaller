@@ -35,20 +35,25 @@ public class Game {
         nextRound();
     }
 
-    public void checkAnswer(boolean higher) {
+    public boolean checkAnswer(boolean higher) {
+        boolean result = false;
         if (mTime <= 0) {
             endGame();
-            return;
+            return false;
         }
         if ((currentNumber > prevNumber) && higher) {
             addScore();
+            result = true;
         }
-        else if((currentNumber < prevNumber) && !higher)
+        else if((currentNumber < prevNumber) && !higher) {
             addScore();
+            result = true;
+        }
         else subScore();
         Log.d("result","current number = " + String.valueOf(currentNumber) + " previous number : "
                 + String.valueOf(prevNumber) + " answer = " + String.valueOf(higher));
         nextRound();
+        return result;
     }
 
     public void nextRound() {

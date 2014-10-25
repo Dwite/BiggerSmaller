@@ -1,10 +1,15 @@
 package smartfoxlabs.higherlower;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -42,25 +47,30 @@ public class ResultActivity extends BaseActivity {
         }
         adapter = new ResultMenuAdapter(getApplicationContext(), menuItems,0);
         lstMenu.setAdapter(adapter);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.result, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent gameTime = new Intent(getApplicationContext(),MainActivity.class);
+                switch (i) {
+                    case 0 : {
+                        Intent mainScreen = new Intent(getApplicationContext(),MenuActivity.class);
+                        mainScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(mainScreen);
+                        break;
+                    }
+                    case 1 :
+                        gameTime.putExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE);
+                        startActivity(gameTime);
+                        finish();
+                        break;
+                    case 2 :
+                        Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
+                        //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
+                        //startActivity(gameTime);
+                        break;
+                    default: break;
+                }
+            }
+        });
     }
 }

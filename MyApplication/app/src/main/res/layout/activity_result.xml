@@ -35,7 +35,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="40"
             android:id="@+id/tVScoreValue"
-            android:textSize="@dimen/text_score"
+            android:textSize="@dimen/text_result"
             android:textStyle="bold"
             android:textColor="@color/text_result"
             android:layout_below="@+id/tvScoreStatus"

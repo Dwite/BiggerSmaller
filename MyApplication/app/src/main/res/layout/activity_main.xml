@@ -6,6 +6,61 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar"
+        android:layout_marginTop="@dimen/margin_small"
+        android:id="@+id/MenuInfo"
+        android:orientation="horizontal">
+        <RelativeLayout style="@style/RlTopInfo">
+
+            <TextView
+                style="@style/Text.Gray"
+                android:text="Очки"
+                android:id="@+id/tvScoreStatus"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"/>
+
+            <TextView
+                style="@style/Text.Blue.Bold"
+                android:text="0"
+                android:textSize="36sp"
+                android:id="@+id/tVScoreValue"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_below="@+id/tvScoreStatus"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/RlTopInfo">
+
+            <TextView
+                style="@style/Text.Gray"
+                android:text="Время"
+                android:id="@+id/tVScore"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                style="@style/Text.Blue.Bold"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_below="@+id/tVScore"
+                android:layout_centerHorizontal="true"
+                android:textSize="36sp"
+                android:text="0"
+                android:id="@+id/textView4" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/MenuInfo"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingBottom="@dimen/margin_small"
+        android:layout_alignBottom="@+id/MenuInfo"
+        android:layout_centerHorizontal="true"
+        android:src="@color/text_gray"/>
     <TextView
         style="@style/Text.Black.Bold"
         android:layout_centerInParent="true"
@@ -15,54 +70,16 @@
         android:textSize="64sp"
         android:onClick="generateNumber"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Очки :"
-        android:id="@+id/tvScoreStatus"
-        android:layout_alignTop="@+id/tVScore"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/tVScoreValue"
-        android:layout_alignTop="@+id/tvScoreStatus"
-        android:layout_toLeftOf="@+id/tVScore"
-        android:layout_toStartOf="@+id/tVScore"
-        android:layout_marginRight="13dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Старт"
+    <ImageButton
+        android:layout_width="@dimen/ic_start"
+        android:layout_height="@dimen/ic_start"
+        android:background="@null"
         android:id="@+id/button3"
+        android:scaleType="fitXY"
         android:onClick="startGame"
         android:layout_below="@+id/tvNumber"
+        android:src="@drawable/ic_play"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Время"
-        android:id="@+id/tVScore"
-        android:layout_marginBottom="32dp"
-        android:layout_above="@+id/tvNumber"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView4"
-        android:layout_alignBottom="@+id/tVScore"
-        android:layout_alignRight="@+id/tvNumber"
-        android:layout_alignEnd="@+id/tvNumber" />
 
     <ProgressBar
         style="@style/ProgressBar"

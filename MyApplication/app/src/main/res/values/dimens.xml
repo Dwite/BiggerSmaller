@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="progressbar">25dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_big">35dp</dimen>
     <dimen name="margin_medium">30dp</dimen>
 
@@ -13,5 +14,6 @@
 
     <dimen name="menu_icon">38dp</dimen>
     <dimen name="menu_icon_big">72dp</dimen>
+    <dimen name="ic_start">128dp</dimen>
     <dimen name="menu_logo">128dp</dimen>
 </resources>

@@ -1,9 +1,14 @@
 package smartfoxlabs.higherlower;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -101,6 +106,7 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
 
 
     public void startGame(View v) {
+        v.setVisibility(View.GONE);
         game.start();
         time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
         pb.setProgress(game.MAX_TIME_LIMIT * 4);
@@ -131,17 +137,45 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
                 break;
             default: break;
         }
-        game.checkAnswer(flag);
+        boolean asnwer = game.checkAnswer(flag);
+        animateNumber(asnwer);
         updateUI();
+    }
+
+    private void animateNumber(boolean asnwer) {
+        if (!asnwer) {
+            int colorFrom = Color.BLACK;
+            int colorTo = Color.RED;
+            int duration = 250;
+            Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(duration);
+            ObjectAnimator.ofObject(txt, "textColor", new ArgbEvaluator(), colorFrom, colorTo)
+                    .setDuration(duration)
+                    .start();
+            Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    txt.setTextColor(Color.BLACK);
+                }
+            }, duration + 50);
+        }
     }
 
     public void onGameEnd() {
         Intent resultActivity = new Intent(getApplicationContext(),ResultActivity.class);
         resultActivity.putExtra(RESULT_CODE,game.getScore());
         startActivity(resultActivity);
+        this.finish();
     }
     @Override
     public void onDoubleTap() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
