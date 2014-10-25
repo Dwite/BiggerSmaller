@@ -1,10 +1,7 @@
 package smartfoxlabs.higherlower;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,7 +27,7 @@ public class ResultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        score = getIntent().getIntExtra(MainActivity.RESULT_CODE, 0);
+        score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
         tvScore = (TextView) findViewById(R.id.tVScoreValue);
         tvScore.setText(String.valueOf(score));
         lstMenu = (ListView) findViewById(R.id.lstResultMenu);
@@ -50,7 +47,7 @@ public class ResultActivity extends BaseActivity {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent gameTime = new Intent(getApplicationContext(),MainActivity.class);
+                Intent gameTime = new Intent(getApplicationContext(),GameActivity.class);
                 switch (i) {
                     case 0 : {
                         Intent mainScreen = new Intent(getApplicationContext(),MenuActivity.class);
@@ -59,7 +56,10 @@ public class ResultActivity extends BaseActivity {
                         break;
                     }
                     case 1 :
-                        gameTime.putExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE);
+                        gameTime.putExtra(
+                                MenuActivity.GAME_MODE,
+                                getIntent().getIntExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE)
+                        );
                         startActivity(gameTime);
                         finish();
                         break;

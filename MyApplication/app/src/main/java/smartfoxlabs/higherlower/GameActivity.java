@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -16,16 +17,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import Core.Game;
+import Core.GameArcade;
+import Core.GameNormal;
 import Gestures.GameGestureListener;
 
 
-public class MainActivity extends BaseActivity implements GameGestureListener.SimpleGestureListener {
+public class GameActivity extends BaseActivity implements GameGestureListener.SimpleGestureListener {
 
     TextView txt;
     TextView score;
     TextView time;
     Game game;
     ProgressBar pb;
+    int mode;
     public static final int TIMER_INTERVAL_SECOND = 1000;
     public static final int TIMER_INTERVAL_PB_UPDATE = 250;
     public static final String RESULT_CODE = "RESULT";
@@ -37,7 +41,9 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
         @Override
         public void run() {
             game.subTimer();
-            time.setText(String.valueOf(game.getTime()));
+            if(game.getTime() > 0)
+                time.setText(String.valueOf(game.getTime()));
+            else time.setText("0");
             //pb.setProgress(game.getTime());
             if (game.getTime() > 0) {
                 timerHandler.postDelayed(this, TIMER_INTERVAL_SECOND);
@@ -68,6 +74,8 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
+        initGame(mode);
         txt = (TextView) findViewById(R.id.tvNumber);
         score = (TextView) findViewById(R.id.tVScoreValue);
         time = (TextView) findViewById(R.id.textView4);
@@ -80,10 +88,23 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
                 generateNumber(view);
             }
         });
-        game = new Game();
-        updateUI();
         detector = new GameGestureListener(this,this);
+        time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
+        updateUI();
+    }
 
+    private void initGame(int mode) {
+        switch (mode) {
+            case MenuActivity.TIME_MODE:
+                game = new GameNormal();
+                break;
+            case MenuActivity.ARCADE_MODE:
+                game = new GameArcade();
+                break;
+            default:
+                game = new GameNormal();
+                break;
+        }
     }
 
     public void generateNumber(View v) {
@@ -120,6 +141,7 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
     public void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
+        timerHandler.removeCallbacks(progressRunnable);
     }
 
     @Override
@@ -138,6 +160,8 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
             default: break;
         }
         boolean asnwer = game.checkAnswer(flag);
+        if(game instanceof GameArcade)
+            pb.setProgress(game.getTime() * 4);
         animateNumber(asnwer);
         updateUI();
     }
@@ -166,6 +190,7 @@ public class MainActivity extends BaseActivity implements GameGestureListener.Si
     public void onGameEnd() {
         Intent resultActivity = new Intent(getApplicationContext(),ResultActivity.class);
         resultActivity.putExtra(RESULT_CODE,game.getScore());
+        resultActivity.putExtra(MenuActivity.GAME_MODE,mode);
         startActivity(resultActivity);
         this.finish();
     }

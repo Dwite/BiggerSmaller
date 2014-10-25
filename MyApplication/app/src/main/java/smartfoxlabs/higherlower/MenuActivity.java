@@ -1,10 +1,7 @@
 package smartfoxlabs.higherlower;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -49,7 +46,7 @@ public class MenuActivity extends BaseActivity {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent gameTime = new Intent(getApplicationContext(),MainActivity.class);
+                Intent gameTime = new Intent(getApplicationContext(),GameActivity.class);
                 switch (i) {
                     case 0 : {
                         gameTime.putExtra(GAME_MODE,TIME_MODE);
@@ -57,9 +54,9 @@ public class MenuActivity extends BaseActivity {
                         break;
                     }
                     case 1 :
-                        Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
                         gameTime.putExtra(GAME_MODE,ARCADE_MODE);
-                        //startActivity(gameTime);
+                        startActivity(gameTime);
                         break;
                     case 2 :
                         Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();

@@ -11,16 +11,14 @@ import android.os.Handler;
 /**
  * Created by dwite_000 on 23.10.2014.
  */
-public class Game {
+public abstract class Game {
     private NumberGenerator generator;
-    public static final int MAX_TIME_LIMIT = 45;
+    public static int MAX_TIME_LIMIT;
     private int score;
-    private int mTime;
-    private int currentNumber;
-    private int prevNumber;
+    protected int mTime;
+    protected int currentNumber;
+    protected int prevNumber;
     private boolean endGame;
-
-
 
     public Game() {
         generator = new NumberGenerator();
@@ -35,7 +33,15 @@ public class Game {
         nextRound();
     }
 
-    public boolean checkAnswer(boolean higher) {
+    public abstract boolean checkAnswer(boolean higher); /*{
+        boolean result = checkCorrect(higher);
+        Log.d("result","current number = " + String.valueOf(currentNumber) + " previous number : "
+                + String.valueOf(prevNumber) + " answer = " + String.valueOf(higher));
+        nextRound();
+        return result;
+    }*/
+
+    protected boolean checkCorrect(boolean higher) {
         boolean result = false;
         if (mTime <= 0) {
             endGame();
@@ -50,9 +56,6 @@ public class Game {
             result = true;
         }
         else subScore();
-        Log.d("result","current number = " + String.valueOf(currentNumber) + " previous number : "
-                + String.valueOf(prevNumber) + " answer = " + String.valueOf(higher));
-        nextRound();
         return result;
     }
 
@@ -83,8 +86,10 @@ public class Game {
     public String getCurrentNumberString() {
         Random r = new Random();
         int type = r.nextInt(20);
+        /*
         if(type == 16)
             return EnglishNumberConverter.convert(currentNumber);
+            */
         if(type == 17) {
             String number = "";
             int partOne = r.nextInt(currentNumber);
@@ -94,6 +99,7 @@ public class Game {
         }
         else return String.valueOf(getCurrentNumber());
     }
+
     private void addScore() { score++; }
 
     public boolean getEndGame() { return endGame; }
