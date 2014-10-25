@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 /**
  * Created by dwite_000 on 23.10.2014.
  */
-public class EnglishNumberConverter {
+public class EnglishNumberConverter extends NumberConverter {
     private static final String[] tensNames = {
             "",
             " ten",
@@ -42,7 +42,7 @@ public class EnglishNumberConverter {
             " nineteen"
     };
 
-    private EnglishNumberConverter() {}
+    public EnglishNumberConverter() {}
 
     private static String convertLessThanOneThousand(int number) {
         String soFar;
@@ -63,7 +63,7 @@ public class EnglishNumberConverter {
     }
 
 
-    public static String convert(long number) {
+    public String convert(long number) {
         // 0 to 999 999 999 999
         if (number == 0) { return "zero"; }
 

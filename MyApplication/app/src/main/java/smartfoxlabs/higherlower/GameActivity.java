@@ -16,6 +16,8 @@ import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import Core.Game;
 import Core.GameArcade;
 import Core.GameNormal;
@@ -91,6 +93,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         detector = new GameGestureListener(this,this);
         time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
         updateUI();
+        Locale current = getResources().getConfiguration().locale;
+        game.gameLocal = current;
     }
 
     private void initGame(int mode) {

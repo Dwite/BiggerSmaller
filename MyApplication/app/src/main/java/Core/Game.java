@@ -1,5 +1,6 @@
 package Core;
 
+import java.util.Locale;
 import java.util.Random;
 
 
@@ -15,6 +16,7 @@ public abstract class Game {
     protected int prevNumber;
     protected boolean mRunning;
     private boolean endGame;
+    public Locale gameLocal;
 
     public Game() {
         generator = new NumberGenerator();
@@ -86,11 +88,20 @@ public abstract class Game {
     public String getCurrentNumberString() {
         Random r = new Random();
         int type = r.nextInt(20);
-        /*
-        if(type == 16)
-            return EnglishNumberConverter.convert(currentNumber);
-            */
-        if(type == 17) {
+
+        if(type == 16 && score >= 10)
+        {   NumberConverter converter;
+            String locale = gameLocal.getDisplayLanguage();
+            if (locale.equals("русский")) {
+                converter = new RussianNumberConverter();
+            }
+            else {
+                converter = new EnglishNumberConverter();
+            }
+            return converter.convert(currentNumber);
+        }
+
+        if(type == 17 && score >= 20) {
             String number = "";
             int partOne = r.nextInt(currentNumber);
             int partTwo = currentNumber - partOne;

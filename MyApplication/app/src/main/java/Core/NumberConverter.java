@@ -5,5 +5,5 @@ package Core;
  */
 public abstract class NumberConverter {
 
-    abstract String convertNumberToWord(int number);
+    public abstract String convert(long number);
 }
