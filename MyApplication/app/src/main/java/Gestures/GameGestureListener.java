@@ -21,7 +21,7 @@ public class GameGestureListener extends SimpleOnGestureListener {
 
     private final static int ACTION_FAKE = -13; //just an unlikely number
     private int swipe_Min_Distance = 100;
-    private int swipe_Max_Distance = 500;
+    private int swipe_Max_Distance = 2500; // Girls swipe settings, bitches can't swipe normally
     private int swipe_Min_Velocity = 100;
 
     private int mode             = MODE_DYNAMIC;
@@ -113,15 +113,15 @@ public class GameGestureListener extends SimpleOnGestureListener {
         velocityY = Math.abs(velocityY);
         boolean result = false;
 
-        if(velocityX > this.swipe_Min_Velocity && xDistance > this.swipe_Min_Distance){
+        /*if(velocityX > this.swipe_Min_Velocity && xDistance > this.swipe_Min_Distance){
             if(e1.getX() > e2.getX()) // right to left
                 this.listener.onSwipe(SWIPE_LEFT);
             else
                 this.listener.onSwipe(SWIPE_RIGHT);
 
             result = true;
-        }
-        else if(velocityY > this.swipe_Min_Velocity && yDistance > this.swipe_Min_Distance){
+        }*/
+        if(velocityY > this.swipe_Min_Velocity && yDistance > this.swipe_Min_Distance){
             if(e1.getY() > e2.getY()) // bottom to up
                 this.listener.onSwipe(SWIPE_UP);
             else

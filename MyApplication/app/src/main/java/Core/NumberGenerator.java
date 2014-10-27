@@ -11,17 +11,9 @@ public class NumberGenerator {
     public NumberGenerator() {
         numberString = "";
     }
+
     public int genNumber() {
-        Random r = new Random();
-        int number;
-        int type = r.nextInt(4);// 0 - simple number 1 - string number 2 - operation
-        switch (type) {
-            case 0 :
-                number = generateRandom();
-                break;
-            default: number = generateRandom();
-        }
-        return number;
+        return generateRandom();
     }
 
     private int generateRandom() {
