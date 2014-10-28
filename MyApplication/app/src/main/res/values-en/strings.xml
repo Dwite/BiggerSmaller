@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HigherLower</string>
+    <string name="home">Home</string>
+    <string name="restart">Restart</string>
+    <string name="score">Score</string>
+    <string name="timer">Timer</string>
+    <string name="game_time">Time game</string>
+    <string name="game_arcade">Arcade</string>
+    <string name="game_multiplayer">Multiplayer</string>
+    <string name="title_activity_result">Results</string>
+    <string name="action_settings">Settings</string>
+    <string name="share_start">Can you beat this score %d points in #higherlower #android #games.</string>
+    <string-array name="result_menu">
+        <item>Main menu</item>
+        <item>Restart</item>
+        <item>Leaderboards</item>
+        <item>Share</item>
+    </string-array>
+    
+    <string-array name="main_menu">
+        <item>Timing game</item>
+        <item>Arcade</item>
+        <item>Multiplayer</item>
+    </string-array>
+
+    <string name="title_activity_menu">MenuActivity</string>
+
+</resources>
