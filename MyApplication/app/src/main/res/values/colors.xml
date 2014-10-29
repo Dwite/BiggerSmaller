@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue">#65a6b8</color>
+    <color name="blue_pressed">#498393</color>
     <color name="background">#f6ece0</color>
     <color name="background_result">#ebebeb</color>
     <color name="text_gray">#a1a09a</color>
     <color name="text_result">#e29814</color>
     <color name="black">#000000</color>
+    <color name="light_gray">#c7c8cd</color>
 
 </resources>

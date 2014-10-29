@@ -17,7 +17,7 @@
 
             <TextView
                 style="@style/Text.Gray"
-                android:text="Очки"
+                android:text="@string/score"
                 android:id="@+id/tvScoreStatus"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"/>
@@ -36,7 +36,7 @@
 
             <TextView
                 style="@style/Text.Gray"
-                android:text="Время"
+                android:text="@string/timer"
                 android:id="@+id/tVScore"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true" />

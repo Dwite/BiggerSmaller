@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,8 +46,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         public void run() {
             game.subTimer();
             if(game.getTime() > 0)
-                time.setText(String.valueOf(game.getTime()));
-            else time.setText("0");
+                time.setText(String.format(getResources().getString(R.string.time_value), game.getTime()));
+            else time.setText(String.format(getResources().getString(R.string.time_value),0));
             //pb.setProgress(game.getTime());
             if (game.getTime() > 0) {
                 timerHandler.postDelayed(this, TIMER_INTERVAL_SECOND);
@@ -76,7 +78,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        overridePendingTransition(R.animator.slide_in, R.animator.slide_out);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);
         txt = (TextView) findViewById(R.id.tvNumber);
@@ -92,7 +94,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             }
         });
         detector = new GameGestureListener(this,this);
-        time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
+        time.setText(String.format(getResources().getString(R.string.time_value), Game.MAX_TIME_LIMIT));
         updateUI();
         Locale current = getResources().getConfiguration().locale;
         game.gameLocal = current;
@@ -134,7 +136,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     public void startGame(View v) {
         v.setVisibility(View.GONE);
         game.start();
-        time.setText(String.valueOf(Game.MAX_TIME_LIMIT));
+        time.setText(String.format(getResources().getString(R.string.time_value), Game.MAX_TIME_LIMIT));
         pb.setProgress(game.MAX_TIME_LIMIT * 4);
         updateUI();
         timerHandler.postDelayed(timerRunnable,TIMER_INTERVAL_SECOND);
@@ -189,6 +191,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
                     txt.setTextColor(Color.BLACK);
                 }
             }, duration + 50);
+            Animation shake = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake);
+            txt.startAnimation(shake);
         }
     }
 

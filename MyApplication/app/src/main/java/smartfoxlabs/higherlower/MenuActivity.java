@@ -3,8 +3,13 @@ package smartfoxlabs.higherlower;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,17 +25,41 @@ public class MenuActivity extends BaseActivity {
     String[] menuNames;
     ArrayList<Integer> menuIcons;
     ArrayList<ResultMenuItem> menuItems;
-
+    ImageView helpButton;
+    RelativeLayout help;
+    RelativeLayout menu;
     public static final String GAME_MODE = "MODE";
     public static final int TIME_MODE = 0;
     public static final int ARCADE_MODE = 1;
     public static final int MULTIPLAYER_MODE = 2;
-
+    Animation slideDown;
+    Animation slideUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        help = (RelativeLayout) findViewById(R.id.RLHelp);
+        menu = (RelativeLayout) findViewById(R.id.RLMENU);
+
+        slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
+        slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
+        slideUp.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                menu.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         lstMenu = (ListView) findViewById(R.id.listView);
         menuNames = getResources().getStringArray(R.array.main_menu);
         menuItems = new ArrayList<ResultMenuItem>();
@@ -73,6 +102,37 @@ public class MenuActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        overridePendingTransition(R.animator.slide_right, R.animator.slide_toright);
+        overridePendingTransition(R.anim.slide_right, R.anim.slide_toright);
+    }
+
+    public void showHelp(View v) {
+        help.setVisibility(View.VISIBLE);
+        help.startAnimation(slideUp);
+        v.setClickable(false);
+        helpButton = (ImageView) v;
+    }
+
+    public void okHelp(View v) {
+        final View view = v;
+        slideDown.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                view.setClickable(false);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        help.setVisibility(View.GONE);
+        help.startAnimation(slideDown);
+        helpButton.setClickable(true);
+        menu.setVisibility(View.VISIBLE);
     }
 }

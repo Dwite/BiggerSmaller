@@ -11,6 +11,7 @@
     <dimen name="text_result">36sp</dimen>
     <dimen name="text_score">32sp</dimen>
     <dimen name="text_menu">20sp</dimen>
+    <dimen name="question_icon">48dp</dimen>
 
     <dimen name="menu_icon">38dp</dimen>
     <dimen name="menu_icon_big">72dp</dimen>

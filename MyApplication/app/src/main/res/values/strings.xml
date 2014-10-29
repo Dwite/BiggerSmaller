@@ -12,6 +12,10 @@
     <string name="title_activity_result">Результаты</string>
     <string name="action_settings">Настройки</string>
     <string name="share_start">Сможешь побить этот счёт %d очков в #higherlower.</string>
+    <string name="help">Проведите по экрану вверх или вниз, если текущее число больше или меньше, чем предыдущее</string>
+    <string name="ok">ОК</string>
+
+    <string name="time_value">00:%d</string>
     <string-array name="result_menu">
         <item>Главное меню</item>
         <item>Заново</item>

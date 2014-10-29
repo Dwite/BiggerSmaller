@@ -27,7 +27,7 @@ public class ResultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        overridePendingTransition(R.animator.slide_in, R.animator.slide_out);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
         tvScore = (TextView) findViewById(R.id.tVScoreValue);
         tvScore.setText(String.valueOf(score));
