@@ -76,6 +76,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        overridePendingTransition(R.animator.slide_in, R.animator.slide_out);
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);
         txt = (TextView) findViewById(R.id.tvNumber);

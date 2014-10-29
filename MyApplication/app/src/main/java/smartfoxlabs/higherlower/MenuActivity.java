@@ -30,6 +30,7 @@ public class MenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
         lstMenu = (ListView) findViewById(R.id.listView);
         menuNames = getResources().getStringArray(R.array.main_menu);
         menuItems = new ArrayList<ResultMenuItem>();
@@ -49,13 +50,13 @@ public class MenuActivity extends BaseActivity {
                 Intent gameTime = new Intent(getApplicationContext(),GameActivity.class);
                 switch (i) {
                     case 0 : {
-                        gameTime.putExtra(GAME_MODE,TIME_MODE);
+                        gameTime.putExtra(GAME_MODE, TIME_MODE);
                         startActivity(gameTime);
                         break;
                     }
                     case 1 :
                         //Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
-                        gameTime.putExtra(GAME_MODE,ARCADE_MODE);
+                        gameTime.putExtra(GAME_MODE, ARCADE_MODE);
                         startActivity(gameTime);
                         break;
                     case 2 :
@@ -69,4 +70,9 @@ public class MenuActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        overridePendingTransition(R.animator.slide_right, R.animator.slide_toright);
+    }
 }
