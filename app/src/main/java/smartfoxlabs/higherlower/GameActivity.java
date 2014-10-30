@@ -82,6 +82,15 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (game != null && game.isRunning()) {
+            timerHandler.postDelayed(timerRunnable, TIMER_INTERVAL_SECOND);
+            timerHandler.postDelayed(progressRunnable, TIMER_INTERVAL_PB_UPDATE);
+        }
+    }
+
     private GameGestureListener detector;
 
     @Override
