@@ -17,10 +17,10 @@
 
     <string name="time_value">00:%d</string>
     <string-array name="result_menu">
-        <item>Главное меню</item>
-        <item>Заново</item>
-        <item>Рекорды</item>
         <item>Поделиться</item>
+        <item>Заново</item>
+        <item>Главное меню</item>
+        <item>Рекорды</item>
     </string-array>
     
     <string-array name="main_menu">

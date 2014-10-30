@@ -5,7 +5,9 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import Core.Game;
@@ -43,6 +46,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     public static final String RESULT_CODE = "RESULT";
     Animation swipeTop;
     Animation swipeBot;
+    MediaPlayer player;
 
     Handler timerHandler = new Handler();
 
@@ -94,6 +98,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setMax(game.MAX_TIME_LIMIT * 4);
         pb.setProgress(game.MAX_TIME_LIMIT * 4);
+        player = new MediaPlayer();
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,6 +204,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             pb.setProgress(game.getTime() * 4);
         animateNumber(asnwer);
         animateBackground(!flag);
+        //TODO DAYM STUPID MP SYSTEM IN ADNROID SUXX
+        //playSound(asnwer);
         updateUI();
     }
     private void animateBackground(boolean asnwer) {
@@ -210,9 +217,14 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             int colorFrom = Color.BLACK;
             int colorTo = Color.RED;
             int duration = 250;
-            Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-            // Vibrate for 500 milliseconds
-            v.vibrate(duration);
+            if(mSettings.contains(APP_PREFERENCES_VIBRO)) {
+                boolean vibrate = mSettings.getBoolean(APP_PREFERENCES_VIBRO,true);
+                if (vibrate) {
+                    Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    // Vibrate for 500 milliseconds
+                    v.vibrate(duration);
+                }
+            }
             ObjectAnimator.ofObject(txt, "textColor", new ArgbEvaluator(), colorFrom, colorTo)
                     .setDuration(duration)
                     .start();
@@ -220,14 +232,53 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             h.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    txt.setTextColor(Color.BLACK);
+                        txt.setTextColor(Color.BLACK);
                 }
             }, duration + 50);
-            Animation shake = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake);
-            txt.startAnimation(shake);
+            //Animation shake = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.shake);
+            //txt.startAnimation(shake);
         }
     }
 
+    public void playSound(boolean positive) {
+            String filename = "";
+            if (player.isPlaying()) {
+                player.stop();
+                player.release();
+            }
+            if (positive) {
+                player.release();
+                filename = "ok.wav";
+                player = MediaPlayer.create(getApplicationContext(), R.raw.ok);
+                player.start();
+            }
+            else
+            {
+                player.release();
+                filename = "fail.wav";
+                player = MediaPlayer.create(getApplicationContext(), R.raw.error3);
+                player.start();
+            }
+            /*AssetFileDescriptor audioFile = null;
+        try {
+            if (player.isPlaying()) {
+                player.stop();
+                player.release();
+                player = new MediaPlayer();
+            }
+
+            AssetFileDescriptor descriptor = getAssets().openFd(filename);
+            player.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+            player.prepare();
+            player.setVolume(1f, 1f);
+            player.setLooping(false);
+            player.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+    }
     public void onGameEnd() {
         Intent resultActivity = new Intent(getApplicationContext(),ResultActivity.class);
         resultActivity.putExtra(RESULT_CODE,game.getScore());
