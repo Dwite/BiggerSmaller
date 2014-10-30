@@ -29,6 +29,8 @@
         <item>Сетевая игра</item>
     </string-array>
 
+    <string name="indev">В разработке</string>
+
     <string name="title_activity_menu">MenuActivity</string>
 
 </resources>

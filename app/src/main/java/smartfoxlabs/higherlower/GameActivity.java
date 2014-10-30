@@ -18,6 +18,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 
 import Core.Game;
@@ -31,12 +33,16 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     TextView txt;
     TextView score;
     TextView time;
+    TextView txtBackround;
     Game game;
     ProgressBar pb;
+
     int mode;
     public static final int TIMER_INTERVAL_SECOND = 1000;
     public static final int TIMER_INTERVAL_PB_UPDATE = 250;
     public static final String RESULT_CODE = "RESULT";
+    Animation swipeTop;
+    Animation swipeBot;
 
     Handler timerHandler = new Handler();
 
@@ -82,6 +88,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);
         txt = (TextView) findViewById(R.id.tvNumber);
+        txtBackround = (TextView) findViewById(R.id.tvNumberBackground);
         score = (TextView) findViewById(R.id.tVScoreValue);
         time = (TextView) findViewById(R.id.textView4);
         pb = (ProgressBar) findViewById(R.id.progressBar);
@@ -98,6 +105,26 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         updateUI();
         Locale current = getResources().getConfiguration().locale;
         game.gameLocal = current;
+        swipeTop = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.swipe_to_top);
+        swipeBot = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.swipe_to_bottom);
+        Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                txtBackround.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
+        swipeTop.setAnimationListener(animationListener);
+        swipeBot.setAnimationListener(animationListener);
     }
 
     private void initGame(int mode) {
@@ -125,6 +152,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     }
 
     public void updateUI() {
+        txtBackround.setText(game.getPrevNumber());
         txt.setText(game.getCurrentNumberString());
         if(txt.getText().toString().length() > 9)
             txt.setTextSize(48f);
@@ -170,9 +198,13 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         if(game instanceof GameArcade)
             pb.setProgress(game.getTime() * 4);
         animateNumber(asnwer);
+        animateBackground(!flag);
         updateUI();
     }
-
+    private void animateBackground(boolean asnwer) {
+        txtBackround.setVisibility(View.VISIBLE);
+        txtBackround.startAnimation((asnwer)?swipeTop:swipeBot);
+    }
     private void animateNumber(boolean asnwer) {
         if (!asnwer) {
             int colorFrom = Color.BLACK;

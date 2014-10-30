@@ -35,10 +35,12 @@ public class ResultActivity extends BaseActivity {
         menuNames = getResources().getStringArray(R.array.result_menu);
         menuItems = new ArrayList<ResultMenuItem>();
         menuIcons = new ArrayList<Integer>();
-        menuIcons.add(R.drawable.ic_home);
-        menuIcons.add(R.drawable.ic_refresh);
-        menuIcons.add(R.drawable.ic_trophy);
+
         menuIcons.add(R.drawable.ic_share);
+        menuIcons.add(R.drawable.ic_refresh);
+        menuIcons.add(R.drawable.ic_home);
+        menuIcons.add(R.drawable.ic_trophy);
+
         for(int i = 0 ; i < menuNames.length; i++) {
             ResultMenuItem menuItem = new ResultMenuItem(menuIcons.get(i),menuNames[i]);
             menuItems.add(menuItem);
@@ -50,7 +52,7 @@ public class ResultActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent gameTime = new Intent(getApplicationContext(),GameActivity.class);
                 switch (i) {
-                    case 0 : {
+                    case 2 : {
                         Intent mainScreen = new Intent(getApplicationContext(),MenuActivity.class);
                         mainScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainScreen);
@@ -64,12 +66,12 @@ public class ResultActivity extends BaseActivity {
                         startActivity(gameTime);
                         finish();
                         break;
-                    case 2 :
-                        Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
+                    case 3 :
+                        Toast.makeText(getApplicationContext(),getString(R.string.indev),Toast.LENGTH_SHORT).show();
                         //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
                         //startActivity(gameTime);
                         break;
-                    case 3: shareIt();
+                    case 0: shareIt();
                         break;
                     default: break;
                 }

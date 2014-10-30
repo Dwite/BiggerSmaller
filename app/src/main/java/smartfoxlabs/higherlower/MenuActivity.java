@@ -89,7 +89,7 @@ public class MenuActivity extends BaseActivity {
                         startActivity(gameTime);
                         break;
                     case 2 :
-                        Toast.makeText(getApplicationContext(),"In development",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.indev),Toast.LENGTH_SHORT).show();
                         //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
                         //startActivity(gameTime);
                         break;

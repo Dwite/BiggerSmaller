@@ -111,6 +111,9 @@ public abstract class Game {
         else return String.valueOf(getCurrentNumber());
     }
 
+    public String getPrevNumber() {
+        return String.valueOf(prevNumber);
+    }
     private void addScore() { score++; }
 
     public boolean getEndGame() { return endGame; }
