@@ -17,7 +17,7 @@
 
     <string name="time_value">00:%d</string>
     <string-array name="result_menu">
-        <item>Поделиться</item>
+        <item>Share</item>
         <item>Заново</item>
         <item>Главное меню</item>
         <item>Рекорды</item>
