@@ -14,7 +14,8 @@
             android:layout_height="@dimen/question_icon"
             android:src="@drawable/ic_question"
             android:layout_alignParentRight="true"
-            android:onClick="showHelp"/>
+            android:onClick="showHelp"
+            android:id="@+id/iVHelp" />
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

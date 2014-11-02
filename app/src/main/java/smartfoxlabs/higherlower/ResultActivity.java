@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,13 +13,20 @@ import java.util.ArrayList;
 
 import Adapters.ResultMenuAdapter;
 import Models.ResultMenuItem;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class ResultActivity extends BaseActivity {
 
-    int score;
+
+    @InjectView(R.id.tVScoreValue)
     TextView tvScore;
+
+    @InjectView(R.id.lstResultMenu)
     ListView lstMenu;
+
+    int score;
     ResultMenuAdapter adapter;
     String[] menuNames;
     ArrayList<Integer> menuIcons;
@@ -27,11 +35,10 @@ public class ResultActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
-        tvScore = (TextView) findViewById(R.id.tVScoreValue);
         tvScore.setText(String.valueOf(score));
-        lstMenu = (ListView) findViewById(R.id.lstResultMenu);
         menuNames = getResources().getStringArray(R.array.result_menu);
         menuItems = new ArrayList<ResultMenuItem>();
         menuIcons = new ArrayList<Integer>();

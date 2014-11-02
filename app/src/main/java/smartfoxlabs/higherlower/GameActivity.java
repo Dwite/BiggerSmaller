@@ -29,16 +29,28 @@ import Core.Game;
 import Core.GameArcade;
 import Core.GameNormal;
 import Gestures.GameGestureListener;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class GameActivity extends BaseActivity implements GameGestureListener.SimpleGestureListener {
 
+    @InjectView(R.id.tvNumber)
     TextView txt;
+
+    @InjectView(R.id.tVScoreValue)
     TextView score;
+
+    @InjectView(R.id.textView4)
     TextView time;
+
+    @InjectView(R.id.tvNumberBackground)
     TextView txtBackround;
-    Game game;
+
+    @InjectView(R.id.progressBar)
     ProgressBar pb;
+
+    Game game;
 
     int mode;
     public static final int TIMER_INTERVAL_SECOND = 1000;
@@ -97,14 +109,10 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);
-        txt = (TextView) findViewById(R.id.tvNumber);
-        txtBackround = (TextView) findViewById(R.id.tvNumberBackground);
-        score = (TextView) findViewById(R.id.tVScoreValue);
-        time = (TextView) findViewById(R.id.textView4);
-        pb = (ProgressBar) findViewById(R.id.progressBar);
         pb.setMax(game.MAX_TIME_LIMIT * 4);
         pb.setProgress(game.MAX_TIME_LIMIT * 4);
         player = new MediaPlayer();
@@ -226,13 +234,14 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             int colorFrom = Color.BLACK;
             int colorTo = Color.RED;
             int duration = 250;
+            boolean vibrate = true;
             if(mSettings.contains(APP_PREFERENCES_VIBRO)) {
-                boolean vibrate = mSettings.getBoolean(APP_PREFERENCES_VIBRO,true);
-                if (vibrate) {
-                    Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    v.vibrate(duration);
-                }
+                vibrate = mSettings.getBoolean(APP_PREFERENCES_VIBRO,true);
+            }
+            if (vibrate) {
+                Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(duration);
             }
             ObjectAnimator.ofObject(txt, "textColor", new ArgbEvaluator(), colorFrom, colorTo)
                     .setDuration(duration)
@@ -258,8 +267,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             if (positive) {
                 player.release();
                 filename = "ok.wav";
-                player = MediaPlayer.create(getApplicationContext(), R.raw.ok);
-                player.start();
+                //player = MediaPlayer.create(getApplicationContext(), R.raw.ok);
+                //player.start();
             }
             else
             {

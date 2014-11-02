@@ -16,18 +16,30 @@ import java.util.ArrayList;
 
 import Adapters.ResultMenuAdapter;
 import Models.ResultMenuItem;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class MenuActivity extends BaseActivity {
 
-    ListView lstMenu;
+
     ResultMenuAdapter adapter;
     String[] menuNames;
     ArrayList<Integer> menuIcons;
     ArrayList<ResultMenuItem> menuItems;
+
+    @InjectView(R.id.iVHelp)
     ImageView helpButton;
+
+    @InjectView(R.id.listView)
+    ListView lstMenu;
+
+    @InjectView(R.id.RLHelp)
     RelativeLayout help;
+
+    @InjectView(R.id.RLMENU)
     RelativeLayout menu;
+
     public static final String GAME_MODE = "MODE";
     public static final int TIME_MODE = 0;
     public static final int ARCADE_MODE = 1;
@@ -38,9 +50,7 @@ public class MenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-        help = (RelativeLayout) findViewById(R.id.RLHelp);
-        menu = (RelativeLayout) findViewById(R.id.RLMENU);
+        ButterKnife.inject(this);
 
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
@@ -60,7 +70,6 @@ public class MenuActivity extends BaseActivity {
 
             }
         });
-        lstMenu = (ListView) findViewById(R.id.listView);
         menuNames = getResources().getStringArray(R.array.main_menu);
         menuItems = new ArrayList<ResultMenuItem>();
         menuIcons = new ArrayList<Integer>();
@@ -109,7 +118,6 @@ public class MenuActivity extends BaseActivity {
         help.setVisibility(View.VISIBLE);
         help.startAnimation(slideUp);
         v.setClickable(false);
-        helpButton = (ImageView) v;
     }
 
     public void okHelp(View v) {
