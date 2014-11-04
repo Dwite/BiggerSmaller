@@ -1,5 +1,6 @@
 package smartfoxlabs.higherlower;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.ArrayList;
 
@@ -46,12 +50,12 @@ public class MenuActivity extends BaseActivity {
     public static final int MULTIPLAYER_MODE = 2;
     Animation slideDown;
     Animation slideUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.inject(this);
-
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
         slideUp.setAnimationListener(new Animation.AnimationListener() {
@@ -142,5 +146,11 @@ public class MenuActivity extends BaseActivity {
         help.startAnimation(slideDown);
         helpButton.setClickable(true);
         menu.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

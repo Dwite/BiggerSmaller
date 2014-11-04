@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">774104953837</string>
+    <string name="achievement_first_time">CgkI7eeA4sMWEAIQAw</string>
+    <string name="achievement_nice_start">CgkI7eeA4sMWEAIQBA</string>
+    <string name="achievement_not_a_coward">CgkI7eeA4sMWEAIQBQ</string>
+    <string name="achievement_half_road_completed">CgkI7eeA4sMWEAIQBg</string>
+    <string name="achievement_higherlower_master">CgkI7eeA4sMWEAIQBw</string>
+    <string name="achievement_higherlower_ninja">CgkI7eeA4sMWEAIQCA</string>
+    <string name="achievement_bad_luck_brian.">CgkI7eeA4sMWEAIQCQ</string>
+    <string name="achievement_lazy_one.">CgkI7eeA4sMWEAIQCg</string>
+    <string name="achievement_train_harder">CgkI7eeA4sMWEAIQCw</string>
+    <string name="achievement_not_bad">CgkI7eeA4sMWEAIQDA</string>
+    <string name="achievement_good_job">CgkI7eeA4sMWEAIQDQ</string>
+    <string name="achievement_smart_one">CgkI7eeA4sMWEAIQDg</string>
+    <string name="achievement_einstein">CgkI7eeA4sMWEAIQDw</string>
+    <string name="achievement_asian">CgkI7eeA4sMWEAIQEA</string>
+    <string name="achievement_godmode">CgkI7eeA4sMWEAIQEQ</string>
+    <string name="leaderboard_arcade">CgkI7eeA4sMWEAIQAQ</string>
+    <string name="leaderboard_time_mode">CgkI7eeA4sMWEAIQAg</string>
+</resources>

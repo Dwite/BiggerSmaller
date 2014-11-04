@@ -10,7 +10,6 @@
     <ImageView
         android:layout_width="@dimen/menu_icon_big"
         android:layout_height="@dimen/menu_icon_big"
-        android:src="@drawable/ic_launcher"
         android:id="@+id/icResultMenu"/>
     <TextView
         style="@style/Text.Black"

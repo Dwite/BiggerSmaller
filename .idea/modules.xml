@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/libs/BaseGameUtils/BaseGameUtils.iml" filepath="$PROJECT_DIR$/app/libs/BaseGameUtils/BaseGameUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BaseGameUtils2/BaseGameUtils2.iml" filepath="$PROJECT_DIR$/BaseGameUtils2/BaseGameUtils2.iml" />
       <module fileurl="file://$PROJECT_DIR$/HigherLower.iml" filepath="$PROJECT_DIR$/HigherLower.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
