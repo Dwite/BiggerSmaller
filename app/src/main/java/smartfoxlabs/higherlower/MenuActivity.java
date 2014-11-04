@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import Adapters.ResultMenuAdapter;
 import Models.ResultMenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class MenuActivity extends BaseActivity {
@@ -112,6 +114,14 @@ public class MenuActivity extends BaseActivity {
         });
     }
 
+    @OnClick(R.id.bnAchivments)
+    public void showAchivments() {
+        startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()),1);
+    }
+    @OnClick(R.id.bnRecrods)
+    public void showRecords() {
+        startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()),2);
+    }
     @Override
     protected void onResume() {
         super.onResume();

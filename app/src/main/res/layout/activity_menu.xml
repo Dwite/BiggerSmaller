@@ -34,6 +34,24 @@
             android:layout_marginBottom="@dimen/margin_big"
             android:src="@drawable/img_logo"
             android:id="@+id/imgLogo" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Records"
+            android:id="@+id/bnRecrods"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Achivements"
+            android:id="@+id/bnAchivments"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/bnRecrods"
+            android:layout_toStartOf="@+id/bnRecrods" />
     </RelativeLayout>
 
     <RelativeLayout
