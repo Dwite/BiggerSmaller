@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HigherLower</string>
+    <string name="home">Домой</string>
+    <string name="restart">Заново</string>
+    <string name="score">Очки</string>
+    <string name="timer">Таймер</string>
+    <string name="game_time">Игра на время</string>
+    <string name="game_arcade">Аркада</string>
+    <string name="game_multiplayer">Сетевая игра</string>
+    <string name="title_activity_result">Результаты</string>
+    <string name="action_settings">Настройки</string>
+    <string name="share_start">Сможешь побить этот счёт %d очков в #higherlower.</string>
+    <string name="help">Проведите по экрану вверх или вниз, если текущее число больше или меньше, чем предыдущее</string>
+    <string name="ok">ОК</string>
+
+    <string name="time_value">00:%d</string>
+    <string-array name="result_menu">
+        <item>Поделиться</item>
+        <item>Заново</item>
+        <item>Главное меню</item>
+        <item>Рекорды</item>
+    </string-array>
+
+    <string-array name="main_menu">
+        <item>Игра на время</item>
+        <item>Аркада</item>
+        <item>Сетевая игра</item>
+    </string-array>
+
+    <string name="achive">Achievement</string>
+    <string name="leaderboards">High Scores</string>
+
+    <string name="indev">В разработке</string>
+
+    <string name="title_activity_menu">MenuActivity</string>
+    <string-array name="naming">
+        <item>Лентяй</item>
+        <item>Больше тренируйся</item>
+        <item>Небольшая победа</item>
+        <item>Хорошо сыграно</item>
+        <item>Гений</item>
+        <item>Эйнштейн</item>
+        <item>Азиат</item>
+        <item>БОГ HigherLower</item>
+    </string-array>
+
+    <string name="bad_luck">Неудачник</string>
+</resources>

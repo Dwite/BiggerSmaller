@@ -35,19 +35,22 @@
             android:src="@drawable/img_logo"
             android:id="@+id/imgLogo" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Records"
+            android:background="@null"
+            android:src="@drawable/ic_leaderboards"
             android:id="@+id/bnRecrods"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Achivements"
+            android:background="@null"
+
+            android:src="@drawable/ic_achiv"
             android:id="@+id/bnAchivments"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/bnRecrods"
@@ -85,6 +88,7 @@
             android:text="@string/ok"
             android:textColor="@android:color/white"
             android:onClick="okHelp"
-            android:layout_marginTop="@dimen/margin_big"/>
+            android:layout_marginTop="@dimen/margin_big"
+            android:id="@+id/bnHelp"/>
     </RelativeLayout>
 </RelativeLayout>

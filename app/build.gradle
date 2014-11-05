@@ -8,8 +8,8 @@ android {
         applicationId "smartfoxlabs.higherlower"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 3
-        versionName "0.81"
+        versionCode 5
+        versionName "1.0"
     }
     buildTypes {
         release {

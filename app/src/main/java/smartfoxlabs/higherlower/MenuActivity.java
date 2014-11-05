@@ -2,6 +2,8 @@ package smartfoxlabs.higherlower;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -45,6 +47,8 @@ public class MenuActivity extends BaseActivity {
 
     @InjectView(R.id.RLMENU)
     RelativeLayout menu;
+
+
 
     public static final String GAME_MODE = "MODE";
     public static final int TIME_MODE = 0;
@@ -112,15 +116,19 @@ public class MenuActivity extends BaseActivity {
                 }
             }
         });
+        if(!mSettings.contains(APP_PREFERENCES_HELP))
+            showHelp(helpButton);
     }
 
     @OnClick(R.id.bnAchivments)
     public void showAchivments() {
-        startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()),1);
+        if(super.getApiClient().isConnected())
+            startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()),1);
     }
     @OnClick(R.id.bnRecrods)
     public void showRecords() {
-        startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()),2);
+        if(super.getApiClient().isConnected())
+            startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()),2);
     }
     @Override
     protected void onResume() {
@@ -136,6 +144,10 @@ public class MenuActivity extends BaseActivity {
 
     public void okHelp(View v) {
         final View view = v;
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_HELP, true);
+        editor.apply();
+
         slideDown.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

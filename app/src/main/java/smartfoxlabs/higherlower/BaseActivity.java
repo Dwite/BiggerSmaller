@@ -22,6 +22,7 @@ public class BaseActivity extends BaseGameActivity {
     public static final String APP_PREFERENCES = "HigherLower";
     public static final String APP_PREFERENCES_SOUND = "Sound";
     public static final String APP_PREFERENCES_VIBRO = "Vibration";
+    public static final String APP_PREFERENCES_HELP = "Tutorial";
 
     protected int RESULT_CODE;
     public static final int REQUEST_CODE = 1002;

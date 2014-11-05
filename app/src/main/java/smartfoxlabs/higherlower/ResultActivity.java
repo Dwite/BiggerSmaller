@@ -32,6 +32,9 @@ public class ResultActivity extends BaseActivity {
     @InjectView(R.id.lstResultMenu)
     ListView lstMenu;
 
+    @InjectView(R.id.tvScoreStatus)
+    TextView tvScoreName;
+
     int score;
     ResultMenuAdapter adapter;
     String[] menuNames;
@@ -105,6 +108,25 @@ public class ResultActivity extends BaseActivity {
                 }
             }
         });
+        String[] names = getResources().getStringArray(R.array.naming);
+        String name = getString(R.string.bad_luck);
+        if (score >= 0)
+            name = names[0];
+        if (score >= 5)
+            name = names[1];
+        if (score >= 15)
+            name = names[2];
+        if (score >= 25)
+            name = names[3];
+        if (score >= 50)
+            name = names[4];
+        if (score >= 100)
+            name = names[5];
+        if (score >= 180)
+            name = names[6];
+        if (score >= 1000)
+            name = names[7];
+        tvScoreName.setText(name);
 
     }
 
