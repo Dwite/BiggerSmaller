@@ -47,4 +47,10 @@
     </string-array>
 
     <string name="bad_luck">Неудачник</string>
+
+    <string name="sound">Звук</string>
+    <string name="vibro">Вибрация</string>
+
+    <string name="on">Вкл</string>
+    <string name="off">Выкл</string>
 </resources>

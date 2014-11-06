@@ -44,4 +44,9 @@
     </string-array>
 
     <string name="bad_luck">Bad luck Brian</string>
+
+    <string name="sound">Sound</string>
+    <string name="vibro">Vibration</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
 </resources>

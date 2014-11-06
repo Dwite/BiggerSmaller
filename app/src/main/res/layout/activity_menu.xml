@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="smartfoxlabs.higherlower.MenuActivity"
-    android:padding="@dimen/activity_vertical_margin"
     android:background="@color/background">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/activity_vertical_margin"
         android:id="@+id/RLMENU">
         <ImageView
             android:layout_width="@dimen/question_icon"
@@ -49,12 +49,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-
             android:src="@drawable/ic_achiv"
             android:id="@+id/bnAchivments"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/bnRecrods"
             android:layout_toStartOf="@+id/bnRecrods" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_settings"
+            android:id="@+id/bnSettings"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/bnAchivments"
+            android:layout_toStartOf="@+id/bnAchivments" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -91,4 +100,9 @@
             android:layout_marginTop="@dimen/margin_big"
             android:id="@+id/bnHelp"/>
     </RelativeLayout>
+
+    <include
+        layout="@layout/fragment_settings"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 </RelativeLayout>

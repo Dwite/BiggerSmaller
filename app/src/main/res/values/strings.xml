@@ -43,5 +43,12 @@
         <item>God of HigherLower</item>
     </string-array>
 
+    <string name="sound">Sound</string>
+    <string name="vibro">Vibration</string>
+
     <string name="bad_luck">Bad luck Brian</string>
+
+
+    <string name="on">On</string>
+    <string name="off">Off</string>
 </resources>

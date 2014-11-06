@@ -10,14 +10,19 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.games.Games;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -48,7 +53,16 @@ public class MenuActivity extends BaseActivity {
     @InjectView(R.id.RLMENU)
     RelativeLayout menu;
 
+    @InjectView(R.id.LLSettings)
+    LinearLayout settings;
 
+    @InjectView(R.id.bnSettings)
+    ImageButton btnSettings;
+
+    @InjectView(R.id.tvVibroValue)
+    TextView tvVibro;
+    @InjectView(R.id.tVSoundValue)
+    TextView tvSound;
 
     public static final String GAME_MODE = "MODE";
     public static final int TIME_MODE = 0;
@@ -56,6 +70,9 @@ public class MenuActivity extends BaseActivity {
     public static final int MULTIPLAYER_MODE = 2;
     Animation slideDown;
     Animation slideUp;
+
+    private boolean settingSound = true;
+    private boolean settingVibro = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,13 +135,59 @@ public class MenuActivity extends BaseActivity {
         });
         if(!mSettings.contains(APP_PREFERENCES_HELP))
             showHelp(helpButton);
+        if(mSettings.contains(APP_PREFERENCES_SOUND)) {
+            settingSound = mSettings.getBoolean(APP_PREFERENCES_SOUND,true);
+        }
+        if(mSettings.contains(APP_PREFERENCES_VIBRO)) {
+            settingVibro = mSettings.getBoolean(APP_PREFERENCES_VIBRO,true);
+        }
     }
+
+    @OnClick(R.id.bnSettings)
+    public void showSeetings() {
+        tvSound.setText((settingSound)?R.string.on:R.string.off);
+        tvVibro.setText((settingVibro)?R.string.on:R.string.off);
+        btnSettings.setClickable(false);
+        menu.setClickable(false);
+        settings.setVisibility(View.VISIBLE);
+        settings.startAnimation(slideUp);
+    }
+
+    @OnClick(R.id.iBClose)
+    public void closeSettings() {
+        btnSettings.setClickable(true);
+        menu.setVisibility(View.VISIBLE);
+        menu.setClickable(true);
+        settings.setVisibility(View.GONE);
+        settings.startAnimation(slideDown);
+    }
+
+
 
     @OnClick(R.id.bnAchivments)
     public void showAchivments() {
         if(super.getApiClient().isConnected())
             startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()),1);
     }
+
+    @OnClick(R.id.RlSound)
+    public void setSound() {
+        settingSound = !settingSound;
+        tvSound.setText((settingSound)?R.string.on:R.string.off);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_SOUND, settingSound);
+        editor.apply();
+    }
+
+    @OnClick(R.id.RLVibro)
+    public void setVibro() {
+        settingVibro = !settingVibro;
+        tvVibro.setText((settingVibro)?R.string.on:R.string.off);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_VIBRO, settingVibro);
+        editor.apply();
+    }
+
     @OnClick(R.id.bnRecrods)
     public void showRecords() {
         if(super.getApiClient().isConnected())
