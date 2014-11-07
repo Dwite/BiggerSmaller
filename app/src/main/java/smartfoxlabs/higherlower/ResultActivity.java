@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gameanalytics.android.GameAnalytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class ResultActivity extends BaseActivity {
         setContentView(R.layout.activity_result);
         ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
+        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE);
         score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
         tvScore.setText(String.valueOf(score));
@@ -126,6 +128,16 @@ public class ResultActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     private void setAchievements() {
         try {
             /*if(super.getApiClient().isConnected()) {
@@ -179,6 +191,13 @@ public class ResultActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        GameAnalytics.startSession(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        GameAnalytics.stopSession();
     }
 
     private void shareIt() {

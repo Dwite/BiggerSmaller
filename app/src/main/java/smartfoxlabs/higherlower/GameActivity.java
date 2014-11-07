@@ -20,6 +20,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.gameanalytics.android.GameAnalytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -101,6 +104,13 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             timerHandler.postDelayed(timerRunnable, TIMER_INTERVAL_SECOND);
             timerHandler.postDelayed(progressRunnable, TIMER_INTERVAL_PB_UPDATE);
         }
+        GameAnalytics.startSession(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     private GameGestureListener detector;
@@ -110,6 +120,8 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
+
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);
@@ -147,6 +159,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         };
         swipeTop.setAnimationListener(animationListener);
         swipeBot.setAnimationListener(animationListener);
+        ((HigherLowerApplication) getApplication()).getTracker(HigherLowerApplication.TrackerName.GLOBAL_TRACKER);
     }
 
     private void initGame(int mode) {
@@ -161,6 +174,11 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
                 game = new GameNormal();
                 break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public void generateNumber(View v) {
@@ -199,6 +217,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
         timerHandler.removeCallbacks(progressRunnable);
+        GameAnalytics.stopSession();
     }
 
     @Override

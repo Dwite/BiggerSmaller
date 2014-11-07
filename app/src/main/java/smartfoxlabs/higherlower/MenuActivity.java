@@ -18,6 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.games.Games;
@@ -31,6 +34,7 @@ import Models.ResultMenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import com.gameanalytics.android.GameAnalytics;
 
 
 public class MenuActivity extends BaseActivity {
@@ -78,6 +82,8 @@ public class MenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
+        GameAnalytics.startSession(this);
         ButterKnife.inject(this);
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
@@ -141,6 +147,8 @@ public class MenuActivity extends BaseActivity {
         if(mSettings.contains(APP_PREFERENCES_VIBRO)) {
             settingVibro = mSettings.getBoolean(APP_PREFERENCES_VIBRO,true);
         }
+
+
     }
 
     @OnClick(R.id.bnSettings)
@@ -162,6 +170,21 @@ public class MenuActivity extends BaseActivity {
         settings.startAnimation(slideDown);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        GameAnalytics.stopSession();
+    }
 
 
     @OnClick(R.id.bnAchivments)
@@ -197,6 +220,7 @@ public class MenuActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         overridePendingTransition(R.anim.slide_right, R.anim.slide_toright);
+        GameAnalytics.startSession(this);
     }
 
     public void showHelp(View v) {

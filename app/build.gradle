@@ -34,4 +34,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.1.+'
     apt 'com.jakewharton:butterknife:6.0.0'
     compile 'com.jakewharton:butterknife:6.0.0'
+    compile files('libs/game-analytics-wrapper-v1.14.5.jar')
 }
