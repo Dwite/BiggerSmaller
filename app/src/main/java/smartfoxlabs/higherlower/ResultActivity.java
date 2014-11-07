@@ -2,8 +2,6 @@ package smartfoxlabs.higherlower;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -16,9 +14,7 @@ import com.google.android.gms.games.Games;
 import java.util.ArrayList;
 
 import Adapters.ResultMenuAdapter;
-import Core.Game;
 import Models.ResultMenuItem;
-import Utils.BaseGameActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -148,7 +144,7 @@ public class ResultActivity extends BaseActivity {
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_half_road_completed),1);
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_higherlower_master),1);
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_higherlower_ninja),1);
-            if(score < - 25)
+            if(score <= -25)
                 Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_bad_luck_brian_));
             else {
                 if (score == 0)
