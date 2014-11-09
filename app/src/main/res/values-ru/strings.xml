@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HigherLower</string>
+    <string name="app_name">BiggerSmaller</string>
     <string name="home">Домой</string>
     <string name="restart">Заново</string>
     <string name="score">Очки</string>

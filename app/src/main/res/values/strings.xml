@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HigherLower</string>
+    <string name="app_name">BiggerSmaller</string>
     <string name="home">Home</string>
     <string name="restart">Restart</string>
     <string name="score">Points</string>
