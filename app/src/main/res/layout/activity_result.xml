@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
     android:background="@color/background_result"
-    tools:context="smartfoxlabs.higherlower.ResultActivity">
+    tools:context="smartfoxlabs.biggersmaller.ResultActivity">
 
 
     <LinearLayout

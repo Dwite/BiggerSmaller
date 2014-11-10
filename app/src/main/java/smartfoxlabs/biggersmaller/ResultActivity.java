@@ -1,4 +1,4 @@
-package smartfoxlabs.higherlower;
+package smartfoxlabs.biggersmaller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gameanalytics.android.GameAnalytics;
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;
@@ -46,7 +45,6 @@ public class ResultActivity extends BaseActivity {
         setContentView(R.layout.activity_result);
         ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE);
         score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
         tvScore.setText(String.valueOf(score));
@@ -110,11 +108,11 @@ public class ResultActivity extends BaseActivity {
         String name = getString(R.string.bad_luck);
         if (score >= 0)
             name = names[0];
-        if (score >= 5)
+        if (score >= 10)
             name = names[1];
-        if (score >= 15)
-            name = names[2];
         if (score >= 25)
+            name = names[2];
+        if (score >= 40)
             name = names[3];
         if (score >= 50)
             name = names[4];
@@ -122,8 +120,6 @@ public class ResultActivity extends BaseActivity {
             name = names[5];
         if (score >= 180)
             name = names[6];
-        if (score >= 1000)
-            name = names[7];
         tvScoreName.setText(name);
 
     }
@@ -151,21 +147,22 @@ public class ResultActivity extends BaseActivity {
                 super.getApiClient().connect();
                 Toast.makeText(getApplicationContext(), "disconnected", Toast.LENGTH_SHORT).show();
             }*/
+            Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_first_time));
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_nice_start),1);
-            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_not_a_coward),1);
-            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_half_road_completed),1);
-            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_higherlower_master),1);
-            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_higherlower_ninja),1);
+            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_brave_one),1);
+            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_half_road),1);
+            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_master),1);
+            Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_ninja),1);
             if(score <= -25)
-                Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_bad_luck_brian_));
+                Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_bad_luck_brayan));
             else {
                 if (score == 0)
-                    Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_lazy_one_));
-                if (score >= 5)
+                    Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_lazy));
+                if (score >= 10)
                     Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_train_harder));
-                if (score >= 15)
-                    Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_not_bad));
                 if (score >= 25)
+                    Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_not_bad));
+                if (score >= 40)
                     Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_good_job));
                 if (score >= 50)
                     Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_smart_one));
@@ -173,8 +170,6 @@ public class ResultActivity extends BaseActivity {
                     Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_einstein));
                 if (score >= 180)
                     Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_asian));
-                if (score >= 1000)
-                    Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_godmode));
             }
             if(mode == MenuActivity.TIME_MODE)
                 Games.Leaderboards.submitScore(super.getApiClient(),getString(R.string.leaderboard_time_mode),score);
@@ -191,13 +186,11 @@ public class ResultActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        GameAnalytics.startSession(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        GameAnalytics.stopSession();
     }
 
     private void shareIt() {

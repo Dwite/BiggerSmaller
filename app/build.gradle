@@ -5,10 +5,10 @@ android {
     buildToolsVersion "21.0.0"
 
     defaultConfig {
-        applicationId "smartfoxlabs.higherlower"
+        applicationId "smartfoxlabs.biggersmaller"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 7
+        versionCode 8
         versionName "1.0"
     }
     buildTypes {

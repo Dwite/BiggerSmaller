@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import Models.ResultMenuItem;
-import smartfoxlabs.higherlower.R;
+import smartfoxlabs.biggersmaller.R;
 
 /**
  * Created by dwite_000 on 24.10.2014.

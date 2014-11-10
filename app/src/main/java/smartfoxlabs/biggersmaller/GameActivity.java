@@ -1,20 +1,16 @@
-package smartfoxlabs.higherlower;
+package smartfoxlabs.biggersmaller;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
@@ -23,9 +19,6 @@ import android.widget.TextView;
 import com.gameanalytics.android.GameAnalytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.Locale;
 
 import Core.Game;
@@ -120,8 +113,6 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
-
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE, MenuActivity.TIME_MODE);
         initGame(mode);

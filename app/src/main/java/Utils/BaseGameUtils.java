@@ -11,7 +11,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.GamesActivityResultCodes;
 
-import smartfoxlabs.higherlower.R;
+import smartfoxlabs.biggersmaller.R;
 
 public class BaseGameUtils {
 

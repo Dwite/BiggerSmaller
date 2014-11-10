@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smartfoxlabs.higherlower" >
+    package="smartfoxlabs.biggersmaller" >
 
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -11,22 +11,22 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/appicon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name=".HigherLowerApplication">
+        android:name="smartfoxlabs.biggersmaller.HigherLowerApplication">
         <activity
-            android:name=".GameActivity"
+            android:name="smartfoxlabs.biggersmaller.GameActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ResultActivity"
+            android:name="smartfoxlabs.biggersmaller.ResultActivity"
             android:label="@string/title_activity_result"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name="smartfoxlabs.biggersmaller.MenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -1,4 +1,4 @@
-package smartfoxlabs.higherlower;
+package smartfoxlabs.biggersmaller;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
