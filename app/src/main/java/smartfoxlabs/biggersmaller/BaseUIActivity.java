@@ -27,7 +27,6 @@ public class BaseUIActivity extends Activity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
     }
 
     @Override

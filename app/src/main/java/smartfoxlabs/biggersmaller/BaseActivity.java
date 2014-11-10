@@ -43,11 +43,6 @@ public class BaseActivity extends BaseGameActivity {
         RESULT_CODE = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
         if (RESULT_CODE == ConnectionResult.SUCCESS) {
             Log.d("Play", "connection success");
-            //beginUserInitiatedSignIn();
-            /*if(!getApiClient().isConnected() && !getApiClient().isConnecting()) {
-                getApiClient().connect();
-                Toast.makeText(getApplicationContext(),"sign in",Toast.LENGTH_SHORT).show();
-            }*/
         }
         else {
             GooglePlayServicesUtil.getErrorDialog(RESULT_CODE,this,REQUEST_CODE).show();

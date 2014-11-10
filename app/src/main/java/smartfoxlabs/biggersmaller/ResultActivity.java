@@ -9,7 +9,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gameanalytics.android.GameAnalytics;
 import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;

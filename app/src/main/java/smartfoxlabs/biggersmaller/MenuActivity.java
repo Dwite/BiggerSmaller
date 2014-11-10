@@ -24,7 +24,6 @@ import Models.ResultMenuItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import com.gameanalytics.android.GameAnalytics;
 
 
 public class MenuActivity extends BaseActivity {
@@ -72,8 +71,6 @@ public class MenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        GameAnalytics.initialise(this, "d07c911e5a494b9b6a52cf8f36c0e6fd6459bc1a", "2042dd91c6ff2a44afefc20316c768fd");
-        GameAnalytics.startSession(this);
         ButterKnife.inject(this);
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
@@ -173,7 +170,6 @@ public class MenuActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        GameAnalytics.stopSession();
     }
 
 
@@ -210,7 +206,6 @@ public class MenuActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         overridePendingTransition(R.anim.slide_right, R.anim.slide_toright);
-        GameAnalytics.startSession(this);
     }
 
     public void showHelp(View v) {

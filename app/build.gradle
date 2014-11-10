@@ -8,8 +8,8 @@ android {
         applicationId "smartfoxlabs.biggersmaller"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 8
-        versionName "1.0"
+        versionCode 9
+        versionName "1.01"
     }
     buildTypes {
         release {
@@ -34,5 +34,4 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.1.+'
     apt 'com.jakewharton:butterknife:6.0.0'
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile files('libs/game-analytics-wrapper-v1.14.5.jar')
 }

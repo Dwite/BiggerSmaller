@@ -16,8 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.gameanalytics.android.GameAnalytics;
-import com.google.android.gms.analytics.GoogleAnalytics;
 
 import java.util.Locale;
 
@@ -97,13 +95,11 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
             timerHandler.postDelayed(timerRunnable, TIMER_INTERVAL_SECOND);
             timerHandler.postDelayed(progressRunnable, TIMER_INTERVAL_PB_UPDATE);
         }
-        GameAnalytics.startSession(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     private GameGestureListener detector;
@@ -150,7 +146,6 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         };
         swipeTop.setAnimationListener(animationListener);
         swipeBot.setAnimationListener(animationListener);
-        ((HigherLowerApplication) getApplication()).getTracker(HigherLowerApplication.TrackerName.GLOBAL_TRACKER);
     }
 
     private void initGame(int mode) {
@@ -208,7 +203,6 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
         timerHandler.removeCallbacks(progressRunnable);
-        GameAnalytics.stopSession();
     }
 
     @Override
@@ -239,6 +233,7 @@ public class GameActivity extends BaseActivity implements GameGestureListener.Si
         txtBackround.setVisibility(View.VISIBLE);
         txtBackround.startAnimation((asnwer)?swipeTop:swipeBot);
     }
+
     private void animateNumber(boolean asnwer) {
         if (!asnwer) {
             int colorFrom = Color.BLACK;
