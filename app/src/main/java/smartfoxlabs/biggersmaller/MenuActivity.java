@@ -15,6 +15,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;
@@ -71,6 +75,24 @@ public class MenuActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        try {
+            ((HigherLowerApplication) getApplication()).getTracker(HigherLowerApplication.TrackerName.GLOBAL_TRACKER);
+
+            GoogleAnalytics.getInstance(this).getLogger()
+                    .setLogLevel(Logger.LogLevel.VERBOSE);
+            // Get tracker.
+            Tracker t = ((HigherLowerApplication)this.getApplication()).getTracker(
+                    HigherLowerApplication.TrackerName.GLOBAL_TRACKER);
+
+            // Set screen name.
+            // Where path is a String representing the screen name.
+            t.setScreenName("MenuActivityS");
+            // Send a screen view.
+            t.send(new HitBuilders.AppViewBuilder().build());
+        }
+        catch (Exception e) {
+
+        }
         ButterKnife.inject(this);
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
@@ -160,11 +182,13 @@ public class MenuActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
