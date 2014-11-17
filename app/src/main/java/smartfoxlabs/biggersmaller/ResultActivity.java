@@ -47,6 +47,13 @@ public class ResultActivity extends BaseActivity {
         mode = getIntent().getIntExtra(MenuActivity.GAME_MODE,MenuActivity.TIME_MODE);
         score = getIntent().getIntExtra(GameActivity.RESULT_CODE, 0);
         tvScore.setText(String.valueOf(score));
+        setMenu();
+        setListListener();
+        setNameBasedOnScore();
+
+    }
+
+    private void setMenu() {
         menuNames = getResources().getStringArray(R.array.result_menu);
         menuItems = new ArrayList<ResultMenuItem>();
         menuIcons = new ArrayList<Integer>();
@@ -60,6 +67,29 @@ public class ResultActivity extends BaseActivity {
         }
         adapter = new ResultMenuAdapter(getApplicationContext(), menuItems,0);
         lstMenu.setAdapter(adapter);
+    }
+
+    private void setNameBasedOnScore() {
+        String[] names = getResources().getStringArray(R.array.naming);
+        String name = getString(R.string.bad_luck);
+        if (score >= 0)
+            name = names[0];
+        if (score >= 10)
+            name = names[1];
+        if (score >= 25)
+            name = names[2];
+        if (score >= 40)
+            name = names[3];
+        if (score >= 50)
+            name = names[4];
+        if (score >= 100)
+            name = names[5];
+        if (score >= 180)
+            name = names[6];
+        tvScoreName.setText(name);
+    }
+
+    private void setListListener() {
         lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -80,14 +110,6 @@ public class ResultActivity extends BaseActivity {
                         finish();
                         break;
                     case 3 :
-                        //Toast.makeText(getApplicationContext(),getString(R.string.indev),Toast.LENGTH_SHORT).show();
-                        //gameTime.putExtra(GAME_MODE,MULTIPLAYER_MODE);
-                        //startActivity(gameTime);
-                        /* achivements
-                        startActivityForResult(Games.Achievements.getAchievementsIntent(
-                                getApiClient()), 1);
-                        */
-
                         if(mode == MenuActivity.TIME_MODE)
                             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(
                                         getApiClient(), getString(R.string.leaderboard_time_mode)),
@@ -95,7 +117,6 @@ public class ResultActivity extends BaseActivity {
                         else startActivityForResult(Games.Leaderboards.getLeaderboardIntent(
                                         getApiClient(), getString(R.string.leaderboard_arcade)),
                                 2);
-                        //startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()),2);
                         break;
                     case 0: shareIt();
                         break;
@@ -103,24 +124,6 @@ public class ResultActivity extends BaseActivity {
                 }
             }
         });
-        String[] names = getResources().getStringArray(R.array.naming);
-        String name = getString(R.string.bad_luck);
-        if (score >= 0)
-            name = names[0];
-        if (score >= 10)
-            name = names[1];
-        if (score >= 25)
-            name = names[2];
-        if (score >= 40)
-            name = names[3];
-        if (score >= 50)
-            name = names[4];
-        if (score >= 100)
-            name = names[5];
-        if (score >= 180)
-            name = names[6];
-        tvScoreName.setText(name);
-
     }
 
     @Override
@@ -135,17 +138,6 @@ public class ResultActivity extends BaseActivity {
 
     private void setAchievements() {
         try {
-            /*if(super.getApiClient().isConnected()) {
-                Toast.makeText(getApplicationContext(),"connected",Toast.LENGTH_SHORT).show();
-            }
-            else
-            if (super.getApiClient().isConnecting()) {
-                Toast.makeText(getApplicationContext(),"connection",Toast.LENGTH_SHORT).show();
-            }
-            else {
-                super.getApiClient().connect();
-                Toast.makeText(getApplicationContext(), "disconnected", Toast.LENGTH_SHORT).show();
-            }*/
             Games.Achievements.unlock(super.getApiClient(),getString(R.string.achievement_first_time));
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_nice_start),1);
             Games.Achievements.increment(super.getApiClient(),getString(R.string.achievement_brave_one),1);
@@ -177,7 +169,7 @@ public class ResultActivity extends BaseActivity {
 
         }
         catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "exception", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "exception", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -196,7 +188,7 @@ public class ResultActivity extends BaseActivity {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String shareBody = getString(R.string.share_start,score);
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HigherLower");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }

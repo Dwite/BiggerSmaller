@@ -11,7 +11,7 @@
     <string name="game_multiplayer">Сетевая игра</string>
     <string name="title_activity_result">Результаты</string>
     <string name="action_settings">Настройки</string>
-    <string name="share_start">Сможешь побить этот счёт %d очков в #biggersmaller.</string>
+    <string name="share_start">Сможешь побить этот счёт %d очков в #biggersmaller ?</string>
     <string name="help">Проведите по экрану вверх или вниз, если текущее число больше или меньше, чем предыдущее</string>
     <string name="ok">ОК</string>
 
